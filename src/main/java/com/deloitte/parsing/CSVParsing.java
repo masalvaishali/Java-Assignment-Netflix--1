@@ -17,19 +17,19 @@ import org.apache.commons.csv.CSVRecord;
 
 public class CSVParsing {
 
-	// Method to handle option 1
 	private static final String SAMPLE_CSV_FILE_PATH = "netflix_titles.csv";
 	private static int exitStatus = 0;
 	private static int menuCh = 0;
 
-	public static void fun1() {
-
+	// This function read records from CSV file which contains TV Show for type
+	// column and display on console
+	public static void getRecordByType() {
 		CSVParser csvParser = null;
 		try {
 			Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
 			csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
 			int loopCount = 0;
-			Scanner sc = new Scanner(System.in); // System.in is a standard input stream.
+			Scanner sc = new Scanner(System.in); 
 			System.out.print("Please enter the number of records to fetch with type(TV Show) :   ");
 			int numberOfRecordToFetch = sc.nextInt();
 			for (CSVRecord csvRecord : csvParser) {
@@ -37,29 +37,29 @@ public class CSVParsing {
 					break;
 				}
 				// Accessing Values by Column Index
-				String type = csvRecord.get(1);
+				String type = csvRecord.get(1); 
 				if (type.equals("TV Show")) {
 					loopCount++;
 					int col = 0;
-					for (col = 0; col < 11; col++) {
+					// for all columns 
+					for (col = 0; col < 11; col++) { 
 						System.out.print(csvRecord.get(col) + ",");
-
 					}
 					System.out.println(csvRecord.get(col));
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			closeCsvParser(csvParser);
-
 		}
-
 	}
 
-	public static void fun2() {
-
+	/*
+	 * This function read records from CSV file which contains Horror Movies for
+	 * listed_in column and display on console
+	 */
+	public static void getRecordByListedIn() {
 		CSVParser csvParser = null;
 		try {
 			Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
@@ -78,9 +78,9 @@ public class CSVParsing {
 				if (listed_in.contains("Horror Movies")) {
 					loopCount++;
 					int col = 0;
+					// for all columns
 					for (col = 0; col < 11; col++) {
 						System.out.print(csvRecord.get(col) + ",");
-
 					}
 					System.out.println(csvRecord.get(col));
 				}
@@ -90,19 +90,20 @@ public class CSVParsing {
 			e.printStackTrace();
 		} finally {
 			closeCsvParser(csvParser);
-
 		}
-
 	}
 
-	public static void fun3() {
-
+	/*
+	 * This function read records from CSV file which contains where country: India
+	 * for listed_in column and display on console
+	 */
+	public static void getRecordByTypeCountry() {
 		CSVParser csvParser = null;
 		try {
 			Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
 			csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
 			int loopCount = 0;
-			Scanner sc = new Scanner(System.in); // System.in is a standard input stream.
+			Scanner sc = new Scanner(System.in); 
 			System.out
 					.print("Please enter the number of records to fetch from type 'Movie' where country is 'India':  ");
 			int numberOfRecordToFetch = sc.nextInt();
@@ -116,9 +117,9 @@ public class CSVParsing {
 				if (type.equals("Movie") && country.equals("India")) {
 					loopCount++;
 					int col = 0;
+					// for all columns
 					for (col = 0; col < 11; col++) {
 						System.out.print(csvRecord.get(col) + ",");
-
 					}
 					System.out.println(csvRecord.get(col));
 				}
@@ -128,20 +129,20 @@ public class CSVParsing {
 			e.printStackTrace();
 		} finally {
 			closeCsvParser(csvParser);
-
 		}
-
 	}
 
-	// Method to handle option 4 date_added
-
-	public static void fun4() throws ParseException {
+	/*
+	 * This function read records from CSV file which contains Horror Movies for
+	 * listed_in column and display on console
+	 */
+	public static void getRecordByDate() throws ParseException {
 		CSVParser csvParser = null;
 		try {
 			Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
 			csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
 			int loopCount = 0;
-			Scanner sc = new Scanner(System.in); // System.in is a standard input stream.
+			Scanner sc = new Scanner(System.in); 
 			Date startDate = null;
 			Date endDate = null;
 			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
@@ -154,7 +155,6 @@ public class CSVParsing {
 				try {
 					startDate = format.parse(startDateToFilter);
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -162,7 +162,6 @@ public class CSVParsing {
 				try {
 					endDate = format.parse(endDateToFilter);
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -180,11 +179,7 @@ public class CSVParsing {
 					System.out.println("Wrong Choice!");
 				}
 			} while (true);
-
-			// System.out.print("Date 1 " + date1 );
-			// System.out.print("Date 2 " + date2);
 			System.out.print("Enter the number of records to fetch between " + startDate + " and " + endDate + ":  ");
-
 			int numberOfRecordToFetch = sc.nextInt();
 			int recordNo = 0;
 			Date formated_date_added = null;
@@ -216,11 +211,9 @@ public class CSVParsing {
 							int col = 0;
 							for (col = 0; col < 11; col++) {
 								System.out.print(csvRecord.get(col) + ",");
-
 							}
 							System.out.println(csvRecord.get(col));
 						}
-
 					} else if (menuCh == 2) {
 						// Accessing Values by Column Index
 						String listed_in = csvRecord.get(10);
@@ -229,11 +222,9 @@ public class CSVParsing {
 							int col = 0;
 							for (col = 0; col < 11; col++) {
 								System.out.print(csvRecord.get(col) + ",");
-
 							}
 							System.out.println(csvRecord.get(col));
 						}
-
 					} else {
 						// Accessing Values by Column Index
 						String type = csvRecord.get(1);
@@ -243,7 +234,6 @@ public class CSVParsing {
 							int col = 0;
 							for (col = 0; col < 11; col++) {
 								System.out.print(csvRecord.get(col) + ",");
-
 							}
 							System.out.println(csvRecord.get(col));
 						}
@@ -254,28 +244,23 @@ public class CSVParsing {
 			System.out.print(
 					"\n\n\n\nTIME TAKEN TO EXECUTE THE QUERY IS:  " + (afterQuerry.getTime() - beforeQuerry.getTime()));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			closeCsvParser(csvParser);
-
 		}
-
 	}
-
+	
 	private static void closeCsvParser(CSVParser csvParser) {
 		if (null != csvParser) {
 			try {
 				csvParser.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
 
 	public static void Menu() {
-		// Display commands
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Please select any one of below options:\n");
 		System.out.println("1. List the first n records where type: TV Show\n");
@@ -283,24 +268,22 @@ public class CSVParsing {
 		System.out.println("3. List the first n type: Movie where country: India\n");
 		System.out.println("4. Sorting based on field date_added\n");
 		System.out.println("5. For Exitn\n\n");
-		System.out.print("Enter Your Choice:  ");
+		System.out.print("Enter Your Choice: ");
 		menuCh = sc.nextInt();
-		// Switch case
 		switch (menuCh) {
 		case 1:
-			fun1();
+			getRecordByType();
 			break;
 		case 2:
-			fun2();
+			getRecordByListedIn();
 			break;
 		case 3:
-			fun3();
+			getRecordByTypeCountry();
 			break;
 		case 4:
 			try {
-				fun4();
+				getRecordByDate();
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -311,26 +294,20 @@ public class CSVParsing {
 			System.out.println("Wrong Choice\n");
 			break;
 		}
-
 	}
 
 	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
 		char ch = 'y';
 		int exitStatus = 0;
 		Scanner sc = new Scanner(System.in);
 		while (ch == 'y' || ch == 'Y') {
-			// Asking from user
 			Menu();
-			// Checking exit status
 			if (exitStatus == 1) {
 				break;
 			}
 			System.out.print("\n\nDo you want to continue??? Yes/No : ");
 			ch = sc.next().charAt(0);
-
 		}
 		sc.close();
 	}
-
 }
